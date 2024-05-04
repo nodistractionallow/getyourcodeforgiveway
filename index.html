@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Code Generator</title>
+</head>
+<body>
+    <div id="codeContainer"></div>
+
+    <script>
+        // Function to get the referring URL
+        function getReferringURL() {
+            return document.referrer;
+        }
+
+        // Check if the referring URL contains "https://linkshortify.com"
+        if (getReferringURL().includes("https://linkshortify.com")) {
+            // If the referring URL is from GitHub, proceed with the code copying process
+
+            // Check if the code is stored in local storage
+            const storedCode = localStorage.getItem('lastCode');
+
+            if (storedCode) {
+                // If code exists in local storage, display it
+                displayCode(storedCode);
+            } else {
+                // If no code exists in local storage, randomly pick a code from the list
+                const codes = [
+                    '8&2Sl7', '9%6Jj7', '8%9Sl7', '4@5Wk2', '1$8Yz2', '4*8En4', '8!3Nr8', '8$2Mz3', '0^2Nx5', '2*0Ad3', '5*7Fa8', '2^6Bq2', '8@4Uq0', '3#7Lr2', '6!9Zd4', '5!1Hl7', '1#8En4', '4!0Hn3', '9%1Vc4', '6%1Le4', '0#0Gb0', '4^6Sm6', '5&1Ui4', '0&6Cl7', '1&0Bs0', '0#5Vs1', '7*5Yl3', '5^7Ld6', '1!2Vh9', '1@8Yz5', '9@5Ra7', '4@9Di4', '0$8Xc7', '7#7Co6', '2#7Lz1', '3*7Dj7', '3#9Yp5', '7@0Lq9', '3*6Da2', '2^3Tq9', '0!5Ip9', '9%0Qh5', '7@3Ws8', '8!3Km4', '0^4Sq2', '5^8Dq5', '5*0Hl9', '0$0Ti2', '8!6Eb8', '8!2Wu4', '9^4Vh3', '5$2Ak2', '7$2Fi3', '7!5Ek5', '0$2Zy7', '4@2Fd6', '1!9Zt7', '6&8Ab2', '7*8Ur9', '1^1Xi7', '7%1Lh9', '3@5Kt9', '1*0Vd9', '6!7Hq7', '1$9Ki4', '3&0Ff6', '5#3Yx0', '5#6Dv0'
+                ];
+
+                const randomIndex = Math.floor(Math.random() * codes.length);
+                const randomCode = codes[randomIndex];
+                
+                // Display the randomly picked code
+                displayCode(randomCode);
+
+                // Save the code to local storage
+                localStorage.setItem('lastCode', randomCode);
+            }
+
+            function displayCode(code) {
+                const codeContainer = document.getElementById('codeContainer');
+                codeContainer.innerHTML = `<h1>Randomly Picked Code: ${code}</h1>
+                                           <button onclick="copyCode('${code}')">Copy Code</button>`;
+            }
+
+            function copyCode(code) {
+                // Create a temporary textarea element
+                const textarea = document.createElement('textarea');
+                textarea.value = code;
+
+                // Append the textarea to the body
+                document.body.appendChild(textarea);
+
+                // Select the code inside the textarea
+                textarea.select();
+
+                // Copy the selected code to the clipboard
+                document.execCommand('copy');
+
+                // Remove the textarea
+                document.body.removeChild(textarea);
+
+                // Inform the user that the code has been copied
+                alert('Code copied to clipboard!');
+            }
+        } else {
+            // If the referring URL is not from GitHub, display a message to the user
+            document.getElementById('codeContainer').innerText = 'Access denied. You are not allowed to copy the code from this page. First see the Ads to see the Code';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
